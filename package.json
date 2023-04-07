@@ -1,0 +1,24 @@
+{
+  "name": "notedoc-ui",
+  "version": "1.0.0",
+  "description": "NoteDoc UI",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metathinker1/notedoc-ui.git"
+  },
+  "author": "Rob Wood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/metathinker1/notedoc-ui/issues"
+  },
+  "homepage": "https://github.com/metathinker1/notedoc-ui#readme",
+  "dependencies": {
+    "axios": "^1.3.5",
+    "express": "^4.18.2"
+  }
+}
