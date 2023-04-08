@@ -3,5 +3,30 @@
     <body>
         <H2>Note Search View</H2>
     </body>
+    <div id="search-criteria">
+        <input id="entity-name" text="entity-name" placeholder="" size="20">
+        <input id="entity-aspect" text="entity-aspect" placeholder="" size="20">
+        <input id="entity-type" text="entity-type" placeholder="" size="20">
+        <input id="search-term" text="search-term" placeholder="" size="20">
+        <button id="get-search-report">View Search Report</button>
+    </div> 
+    <div id="search-report-view">
 
+    </div>
 </html>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    document.getElementById("get-search-report").onclick = function getSearchReport() {
+        const headers = {"Content-Type":"text/plain"}
+        const entityName = document.getElementById("entity-name").value
+        const entityAspect = document.getElementById("entity-aspect").value
+        const entityType = document.getElementById("entity-type").value
+        const searchTerm = document.getElementById("search-term").value
+        const post_request_obj = {name: entityName, aspect: entityAspect, type: entityType, search_term: searchTerm, format: "html"}
+        const url = 'http://localhost:5042/notedocui/search'
+        axios.post(url, post_request_obj, headers).then(response => {
+            document.getElementById("search-report-view").innerHTML = response.data
+        })
+         
+    }
+</script>

@@ -40,6 +40,17 @@ app.get('/notedocui/statusreport', async (req, res) => {
     res.send(statusReport)
 })
 
+app.post('/notedocui/search', async (req, res) => {
+    const entityName = req.body.name
+    const entityAspect = req.body.aspect
+    const entityType = req.body.type
+    const searchTerm = req.body.search_term
+
+    const noteDoc = new NoteDocument()
+    const statusReport = await noteDoc.getSearchReport(entityName, entityAspect, entityType, searchTerm)
+    res.type('text/html')
+    res.send(statusReport)
+})
 
 app.listen(port, () => console.log(
     `Express started on http://localhost:${port}; ` +

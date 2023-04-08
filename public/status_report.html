@@ -23,9 +23,6 @@
         const params_obj = {params: {days: days, begin: beginDate, end: endDate, format: "html"}}
         const url = 'http://localhost:5042/notedocui/statusreport'
         axios.get(url,params_obj, headers).then(response => {
-            // const title = 'Title'
-            // const win = window.open("", title)
-            // win.document.body.innerHTML = response.data
             document.getElementById("status-report-view").innerHTML = response.data
         })
          
