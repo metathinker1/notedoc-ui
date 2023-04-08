@@ -10,6 +10,26 @@
         <button id="get-summary-outline">View Summary Outline</button>
     </div> 
     <div id="summary-outline-view">
-        
+
     </div>
 </html>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    document.getElementById("get-summary-outline").onclick = function getSummaryOutline() {
+        //alert("getNoteDocument")
+        const headers = {"Content-Type":"text/plain"}
+        const name = document.getElementById("entityName").value
+        const type = document.getElementById("entityType").value
+        const aspect = document.getElementById("entityAspect").value
+        const params_obj = {params: {name: name, type: type, aspect: aspect, format: "html"}}
+        // const url = 'http://localhost:5100/notedocsvc/outline/summary'
+        const url = 'http://localhost:5042/notedocui/outline/summary'
+        axios.get(url,params_obj, headers).then(response => {
+            // const title = 'Title'
+            // const win = window.open("", title)
+            // win.document.body.innerHTML = response.data
+            document.getElementById("summary-outline-view").innerHTML = response.data
+        })
+         
+    }
+</script>
