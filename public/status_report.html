@@ -3,5 +3,31 @@
     <body>
         <H2>Status Report View</H2>
     </body>
+    <div id="date-selector">
+        <input id="days" text="days" placeholder="" size="20">
+        <input id="begin-date" text="begin-date" placeholder="" size="20">
+        <input id="end-date" text="begin-date" placeholder="" size="20">
+        <button id="get-status-report">View Status Report</button>
+    </div> 
+    <div id="status-report-view">
 
+    </div>
 </html>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    document.getElementById("get-status-report").onclick = function getStatusReport() {
+        const headers = {"Content-Type":"text/plain"}
+        const days = document.getElementById("days").value
+        const beginDate = document.getElementById("begin-date").value
+        const endDate = document.getElementById("end-date").value
+        const params_obj = {params: {days: days, begin: beginDate, end: endDate, format: "html"}}
+        const url = 'http://localhost:5042/notedocui/statusreport'
+        axios.get(url,params_obj, headers).then(response => {
+            // const title = 'Title'
+            // const win = window.open("", title)
+            // win.document.body.innerHTML = response.data
+            document.getElementById("status-report-view").innerHTML = response.data
+        })
+         
+    }
+</script>

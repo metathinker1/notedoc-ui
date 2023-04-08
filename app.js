@@ -18,16 +18,26 @@ app.get('/notedocui/ping', (req, res) => {
     res.send('pong')
 })
 
-//app.get('/notedocui/outline/summary', (req, res) => {
 app.get('/notedocui/outline/summary', async (req, res) => {
     const entityName = req.query.name
     const entityType = req.query.type
     const entityAspect = req.query.aspect
 
     const noteDoc = new NoteDocument()
-    const summary = await noteDoc.getOutlineSummary(entityName, entityType, entityAspect)
+    const summaryOutline = await noteDoc.getOutlineSummary(entityName, entityType, entityAspect)
     res.type('text/html')
-    res.send(summary)
+    res.send(summaryOutline)
+})
+
+app.get('/notedocui/statusreport', async (req, res) => {
+    const days = req.query.days
+    const beginDate = req.query.begin
+    const endDate = req.query.end
+
+    const noteDoc = new NoteDocument()
+    const statusReport = await noteDoc.getStatusReport(days, beginDate, endDate)
+    res.type('text/html')
+    res.send(statusReport)
 })
 
 
