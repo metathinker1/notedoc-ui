@@ -1,5 +1,9 @@
 const axios = require('axios')
 
+const BASE_URL = 'http://192.168.0.33'
+const PORT = '5100'
+// 'http://192.168.0.33'
+// 'http://192.168.1.31'
 
 class NoteDocument {
     
@@ -10,8 +14,7 @@ class NoteDocument {
             const params_obj = {params: {name: name, type: type, aspect: aspect, format: "html"}}
             // https://github.com/axios/axios/issues/3821
             //const url = 'http://localhost:5100/notedocsvc/outline/summary'
-            const url = 'http://192.168.1.31:5100/notedocsvc/outline/summary'
-            //const url = 'http://192.168.0.33:5100/notedocsvc/outline/summary'
+            const url = BASE_URL + ':' + PORT + '/notedocsvc/outline/summary'
             axios.get(url, params_obj, headers).then(response => {
                 resolve(response.data)
             })
@@ -46,8 +49,7 @@ class NoteDocument {
                 params_obj = {params: {days: days, format: "html"}}
             }
 
-            const url = 'http://192.168.1.31:5100/notedocsvc/statusreport'
-            //const url = 'http://192.168.0.33:5100/notedocsvc/statusreport'
+            const url = BASE_URL + ':' + PORT + '/notedocsvc/statusreport'
             axios.get(url, params_obj, headers).then(response => {
                 resolve(response.data)
             })
@@ -78,8 +80,7 @@ getSearchReport (entityName, entityAspect, entityType, searchTerm)  {
             let post_request_obj = null
             post_request_obj = {entity_name_arg: entityName, entity_aspect_arg: entityAspect, entity_type: entityType, search_term: searchTerm, format: "html"}
 
-            const url = 'http://192.168.1.31:5100/notedocsvc/search'
-            //const url = 'http://192.168.0.33:5100/notedocsvc/search'
+            const url = BASE_URL + ':' + PORT + '/notedocsvc/search'
             axios.post(url, post_request_obj, headers).then(response => {
                 resolve(response.data)
             })
