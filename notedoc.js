@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-const BASE_URL = 'http://192.168.0.33'
+const BASE_URL = 'http://127.0.0.1'
 const PORT = '5100'
 // 'http://192.168.0.33'
 // 'http://192.168.1.31'
