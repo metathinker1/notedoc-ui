@@ -4,9 +4,16 @@
         <H2>Status Report View</H2>
     </body>
     <div id="date-selector">
+        <label for="days">Days</label>
         <input id="days" text="days" placeholder="" size="20">
+        <label for="begin-date">Begin</label>
         <input id="begin-date" text="begin-date" placeholder="" size="20">
-        <input id="end-date" text="begin-date" placeholder="" size="20">
+        <label for="end-date">End</innput>
+        <input id="end-date" text="end-date" placeholder="" size="20">
+        <label for="entithy">Entity</label>
+        <input id="entity" text="entity" placeholder="" size="20">
+        <label for="entity-child">Child</label>
+        <input id="entity-child" type="checkbox" placeholder="" size="5">
         <button id="get-status-report">View Status Report</button>
     </div> 
     <div id="status-report-view">
@@ -20,7 +27,13 @@
         const days = document.getElementById("days").value
         const beginDate = document.getElementById("begin-date").value
         const endDate = document.getElementById("end-date").value
-        const params_obj = {params: {days: days, begin: beginDate, end: endDate, format: "html"}}
+        const entity = document.getElementById("entity").value
+        const entityChildren = document.getElementById("entity-child").value
+        let include_workitems = "True"
+        if (entity.length > 0) {
+            include_workitems = "False"
+        }
+        const params_obj = {params: {days: days, begin: beginDate, end: endDate, entity: entity, child: entityChildren, work: include_workitems, format: "html"}}
         const url = 'http://localhost:5042/notedocui/statusreport'
         axios.get(url,params_obj, headers).then(response => {
             document.getElementById("status-report-view").innerHTML = response.data

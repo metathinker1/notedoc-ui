@@ -33,9 +33,12 @@ app.get('/notedocui/statusreport', async (req, res) => {
     const days = req.query.days
     const beginDate = req.query.begin
     const endDate = req.query.end
+    const entity = req.query.entity
+    const entityChildren = req.query.child
+    const work = req.query.work
 
     const noteDoc = new NoteDocument()
-    const statusReport = await noteDoc.getStatusReport(days, beginDate, endDate)
+    const statusReport = await noteDoc.getStatusReport(days, beginDate, endDate, entity, entityChildren, work)
     res.type('text/html')
     res.send(statusReport)
 })
