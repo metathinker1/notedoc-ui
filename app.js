@@ -44,13 +44,14 @@ app.get('/notedocui/statusreport', async (req, res) => {
 })
 
 app.post('/notedocui/search', async (req, res) => {
+    const entityPattern = req.body.entity_pattern
     const entityName = req.body.name
     const entityAspect = req.body.aspect
     const entityType = req.body.type
     const searchTerm = req.body.search_term
 
     const noteDoc = new NoteDocument()
-    const statusReport = await noteDoc.getSearchReport(entityName, entityAspect, entityType, searchTerm)
+    const statusReport = await noteDoc.getSearchReport(entityPattern, entityName, entityAspect, entityType, searchTerm)
     res.type('text/html')
     res.send(statusReport)
 })
