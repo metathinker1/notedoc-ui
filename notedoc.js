@@ -75,11 +75,11 @@ class NoteDocument {
         })
     }
 
-getSearchReport (entityName, entityAspect, entityType, searchTerm)  {
+getSearchReport (entityPattern, entityName, entityAspect, entityType, searchTerm)  {
         return new Promise( resolve => {
             const headers = {"Content-Type":"text/html"}
             let post_request_obj = null
-            post_request_obj = {entity_name_arg: entityName, entity_aspect_arg: entityAspect, entity_type: entityType, search_term: searchTerm, format: "html"}
+            post_request_obj = {entity_pattern: entityPattern, entity_name_arg: entityName, entity_aspect_arg: entityAspect, entity_type: entityType, search_term: searchTerm, format: "html"}
 
             const url = BASE_URL + ':' + PORT + '/notedocsvc/search'
             axios.post(url, post_request_obj, headers).then(response => {
