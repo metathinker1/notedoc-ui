@@ -28,11 +28,12 @@
         const beginDate = document.getElementById("begin-date").value
         const endDate = document.getElementById("end-date").value
         const entity = document.getElementById("entity").value
-        const entityChildren = document.getElementById("entity-child").value
-        let include_workitems = "True"
-        if (entity.length > 0) {
-            include_workitems = "False"
-        }
+        const entityChildren = document.getElementById("entity-child").value == "on" ? "true" : "false"
+        // let include_workitems = "True"
+        // if (entity.length > 0) {
+        //     include_workitems = "False"
+        // }
+        const include_workitems = "false"
         const params_obj = {params: {days: days, begin: beginDate, end: endDate, entity: entity, child: entityChildren, work: include_workitems, format: "html"}}
         const url = 'http://localhost:5042/notedocui/statusreport'
         axios.get(url,params_obj, headers).then(response => {

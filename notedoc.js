@@ -42,7 +42,8 @@ class NoteDocument {
     getStatusReport (days, beginDate, endDate, entity, entityChildren, work) {
         return new Promise( resolve => {
             const headers = {"Content-Type":"text/html"}
-            const children = entityChildren == "on" ? "True" : "False"
+            //const children = entityChildren == "on" ? "True" : "False"
+            const children = entityChildren == "true" ? "True" : "False"
             let params_obj = null
             if (days == null || days.length == 0) {
                 params_obj = {params: {begin: beginDate, end: endDate, entity, children, work, format: "html"}}
