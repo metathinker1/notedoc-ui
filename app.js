@@ -18,6 +18,13 @@ app.get('/notedocui/ping', (req, res) => {
     res.send('pong')
 })
 
+app.get('/notedocui/getentities', async (req, res) => {
+    const noteDoc = new NoteDocument()
+    const entitiesJson = await noteDoc.getEntities()
+    res.type('application/json')
+    res.send(entitiesJson)
+})
+
 app.get('/notedocui/outline/summary', async (req, res) => {
     const entityName = req.query.name
     const entityType = req.query.type
