@@ -25,6 +25,13 @@ app.get('/notedocui/getentities', async (req, res) => {
     res.send(entitiesJson)
 })
 
+app.get('/notedocui/getdomains', async (req, res) => {
+    const noteDoc = new NoteDocument()
+    const domainsJson = await noteDoc.getDomains()
+    res.type('application/json')
+    res.send(domainsJson)
+})
+
 app.get('/notedocui/outline/summary', async (req, res) => {
     const entityName = req.query.name
     const entityType = req.query.type
@@ -41,10 +48,10 @@ app.get('/notedocui/report/status', async (req, res) => {
     const beginDate = req.query.begin
     const endDate = req.query.end
     const entity = req.query.entity
-    const ancestryDomain = req.query.child
+    const domain = req.query.domain
 
     const noteDoc = new NoteDocument()
-    const statusReport = await noteDoc.getReport("status", days, beginDate, endDate, entity)
+    const statusReport = await noteDoc.getReport("status", days, beginDate, endDate, entity, domain)
     res.type('text/html')
     res.send(statusReport)
 })

@@ -36,6 +36,34 @@ class NoteDocument {
         })
     }
     
+    getDomains () {
+        return new Promise( resolve => {
+            const headers = {"Content-Type":"text/html"}
+            const params_obj = {}
+            const url = BASE_URL + ':' + PORT + '/notedocsvc/anc-domains'
+            axios.get(url, params_obj, headers).then(response => {
+                resolve(response.data)
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
+                console.log(error.config);
+            })
+        })
+    }
 
     getOutlineSummary (name, type, aspect) {
         return new Promise( resolve => {
@@ -68,14 +96,14 @@ class NoteDocument {
         })
     }
 
-    getReport (reportType, days, beginDate, endDate, entity) {
+    getReport (reportType, days, beginDate, endDate, entity, domain) {
         return new Promise( resolve => {
             const headers = {"Content-Type":"text/html"}
             let params_obj = null
             if (days == null || days.length == 0) {
                 params_obj = {params: {begin: beginDate, end: endDate, entity, format: "html"}}
             } else {
-                params_obj = {params: {days: days, entity, format: "html"}}
+                params_obj = {params: {days: days, entity, domain, format: "html"}}
             }
 
             const url = BASE_URL + ':' + PORT + '/notedocsvc/report/' + reportType

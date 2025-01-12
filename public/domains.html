@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <H2>NoteDoc Domains View</H2>
+    </body>
+    <div id="domain-table-div">
+    </div> 
+
+    </div>
+</html>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+    function getDomainsOnload() {
+        console.log('Stop here');
+
+        const headers = {"Content-Type":"text/plain"}
+        const params_obj = {}
+        const url = 'http://localhost:5042/notedocui/getdomains'
+        // .then() chaining example: https://forum.freecodecamp.org/t/foreach-in-a-api-w-axios/407946/2
+        axios.get(url,params_obj, headers).then(response => {
+            const domainArr = Object.entries(response.data);
+            // console.log(domainArr)
+            const tableDiv = document.getElementById("domain-table-div")
+            const table = document.createElement("table");
+            // "http://localhost:5042/notedocui/outline/summary?name=Kubernetes&type=AppDevTool&aspect=Toolbox&format=html"
+            const reportURL = "http://localhost:5042/notedocui/report/"
+            domainArr.forEach(domainRec => {
+                // console.log(domainRec)
+                const row = table.insertRow();
+                const cell1 = row.insertCell();
+                cell1.textContent = domainRec[1]
+
+                const cellStatus = row.insertCell()
+                const linkStatus = document.createElement("a");
+                linkStatus.href = reportURL + "status?domain=" + domainRec[1] + "&days=180&format=html"
+                linkStatus.textContent = "Status"
+                cellStatus.appendChild(linkStatus)
+
+                const cellKeyInfo = row.insertCell()
+                const linkKeyInfo = document.createElement("a");
+                linkKeyInfo.href = reportURL + "keyinfo?domain=" + domainRec[1] + "&days=180&format=html"
+                linkKeyInfo.textContent = "KeyInfo"
+                cellKeyInfo.appendChild(linkKeyInfo)
+
+            })
+
+            tableDiv.appendChild(table)
+        })
+
+    }
+  
+    if (window.addEventListener)
+        window.addEventListener("load", getDomainsOnload, false);
+    else if (window.attachEvent)
+        window.attachEvent("onload", getDomainsOnload);
+    else window.onload = getDomainsOnload;
+  </script>
