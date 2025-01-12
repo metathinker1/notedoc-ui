@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <H2>NoteDoc Entities View</H2>
+    </body>
+    <div id="entity-table-div">
+    </div> 
+
+    </div>
+</html>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+    function getEntitiesOnload() {
+        console.log('Stop here');
+
+        const headers = {"Content-Type":"text/plain"}
+        const params_obj = {}
+        const url = 'http://localhost:5042/notedocui/getentities'
+        // .then() chaining example: https://forum.freecodecamp.org/t/foreach-in-a-api-w-axios/407946/2
+        axios.get(url,params_obj, headers).then(response => {
+            // console.log('response: ' + response)
+            // document.getElementById("status-report-view").innerHTML = response.data
+            // data = response.json()
+            const entityArr = Object.entries(response.data);
+            // console.log(entityArr)
+            const tableDiv = document.getElementById("entity-table-div")
+            const table = document.createElement("table");
+            // "http://localhost:5042/notedocui/outline/summary?name=Kubernetes&type=AppDevTool&aspect=Toolbox&format=html"
+            const linkPart1 = "http://localhost:5042/notedocui/outline/summary?name="
+            entityArr.forEach(entityRec => {
+                // console.log(entityRec)
+                const row = table.insertRow();
+                const cell1 = row.insertCell();
+                cell1.textContent = entityRec[0]
+                var entityParts = entityRec[0].split(".")
+                const entityAspects = entityRec[1]
+                const cell2 = row.insertCell()
+                if (entityAspects.includes("Reference")) {
+                    const link = document.createElement("a");
+                    link.href = linkPart1 + entityParts[1] + "&type=" + entityParts[0] + "&aspect=Reference&format=html"
+                    link.textContent = "nodoc"
+                    cell2.appendChild(link)
+                } else {
+                    cell2.textContent = "    "
+                }
+
+                const cell3 = row.insertCell()
+                if (entityAspects.includes("Toolbox")) {
+                    const link = document.createElement("a");
+                    link.href = linkPart1 + entityParts[1] + "&type=" + entityParts[0] + "&aspect=Toolbox&format=html"
+                    link.textContent = "ntlbox"
+                    cell3.appendChild(link)
+                } else {
+                    cell3.textContent = "    "
+                }
+
+                const cell4 = row.insertCell()
+                if (entityAspects.includes("SupportReference")) {
+                    const link = document.createElement("a");
+                    link.href = linkPart1 + entityParts[1] + "&type=" + entityParts[0] + "&aspect=SupportReference&format=html"
+                    link.textContent = "nosupp"
+                    cell4.appendChild(link)
+                } else {
+                    cell4.textContent = "    "
+                }
+            })
+            // for (let i = 0; i < 3; i++) {
+            //     const row = table.insertRow();
+            //     const cell1 = row.insertCell();
+            //     const cell2 = row.insertCell();
+            //     cell1.textContent = "Data " + (i + 1);
+            //     cell2.textContent = "Data " + (i + 1);
+            // }
+
+            tableDiv.appendChild(table)
+        })
+
+        // var element = document.createElement("script");
+        // element.src = "deferredfunctions.js";
+        // document.body.appendChild(element);
+    }
+  
+    if (window.addEventListener)
+        window.addEventListener("load", getEntitiesOnload, false);
+    else if (window.attachEvent)
+        window.attachEvent("onload", getEntitiesOnload);
+    else window.onload = getEntitiesOnload;
+  </script>
