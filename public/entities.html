@@ -26,7 +26,8 @@
             const tableDiv = document.getElementById("entity-table-div")
             const table = document.createElement("table");
             // "http://localhost:5042/notedocui/outline/summary?name=Kubernetes&type=AppDevTool&aspect=Toolbox&format=html"
-            const linkPart1 = "http://localhost:5042/notedocui/outline/summary?name="
+            const outlineURL = "http://localhost:5042/notedocui/outline/summary?name="
+            const reportURL = "http://localhost:5042/notedocui/report/"
             entityArr.forEach(entityRec => {
                 // console.log(entityRec)
                 const row = table.insertRow();
@@ -34,10 +35,23 @@
                 cell1.textContent = entityRec[0]
                 var entityParts = entityRec[0].split(".")
                 const entityAspects = entityRec[1]
+
+                const cellStatus = row.insertCell()
+                const linkStatus = document.createElement("a");
+                linkStatus.href = reportURL + "status?entity=" + entityParts[0] + "." + entityParts[1] + "&days=180&format=html"
+                linkStatus.textContent = "Status"
+                cellStatus.appendChild(linkStatus)
+
+                const cellKeyInfo = row.insertCell()
+                const linkKeyInfo = document.createElement("a");
+                linkKeyInfo.href = reportURL + "keyinfo?entity=" + entityParts[0] + "." + entityParts[1] + "&days=180&format=html"
+                linkKeyInfo.textContent = "KeyInfo"
+                cellKeyInfo.appendChild(linkKeyInfo)
+
                 const cell2 = row.insertCell()
                 if (entityAspects.includes("Reference")) {
                     const link = document.createElement("a");
-                    link.href = linkPart1 + entityParts[1] + "&type=" + entityParts[0] + "&aspect=Reference&format=html"
+                    link.href = outlineURL + entityParts[1] + "&type=" + entityParts[0] + "&aspect=Reference&format=html"
                     link.textContent = "nodoc"
                     cell2.appendChild(link)
                 } else {
@@ -47,7 +61,7 @@
                 const cell3 = row.insertCell()
                 if (entityAspects.includes("Toolbox")) {
                     const link = document.createElement("a");
-                    link.href = linkPart1 + entityParts[1] + "&type=" + entityParts[0] + "&aspect=Toolbox&format=html"
+                    link.href = outlineURL + entityParts[1] + "&type=" + entityParts[0] + "&aspect=Toolbox&format=html"
                     link.textContent = "ntlbox"
                     cell3.appendChild(link)
                 } else {
@@ -57,7 +71,7 @@
                 const cell4 = row.insertCell()
                 if (entityAspects.includes("SupportReference")) {
                     const link = document.createElement("a");
-                    link.href = linkPart1 + entityParts[1] + "&type=" + entityParts[0] + "&aspect=SupportReference&format=html"
+                    link.href = outlineURL + entityParts[1] + "&type=" + entityParts[0] + "&aspect=SupportReference&format=html"
                     link.textContent = "nosupp"
                     cell4.appendChild(link)
                 } else {

@@ -36,6 +36,32 @@ app.get('/notedocui/outline/summary', async (req, res) => {
     res.send(summaryOutline)
 })
 
+app.get('/notedocui/report/status', async (req, res) => {
+    const days = req.query.days
+    const beginDate = req.query.begin
+    const endDate = req.query.end
+    const entity = req.query.entity
+    const ancestryDomain = req.query.child
+
+    const noteDoc = new NoteDocument()
+    const statusReport = await noteDoc.getReport("status", days, beginDate, endDate, entity)
+    res.type('text/html')
+    res.send(statusReport)
+})
+
+app.get('/notedocui/report/keyinfo', async (req, res) => {
+    const days = req.query.days
+    const beginDate = req.query.begin
+    const endDate = req.query.end
+    const entity = req.query.entity
+    const ancestryDomain = req.query.child
+
+    const noteDoc = new NoteDocument()
+    const statusReport = await noteDoc.getReport("keyinfo", days, beginDate, endDate, entity)
+    res.type('text/html')
+    res.send(statusReport)
+})
+
 app.get('/notedocui/statusreport', async (req, res) => {
     const days = req.query.days
     const beginDate = req.query.begin
