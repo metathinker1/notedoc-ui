@@ -28,54 +28,80 @@
             // "http://localhost:5042/notedocui/outline/summary?name=Kubernetes&type=AppDevTool&aspect=Toolbox&format=html"
             const outlineURL = "http://localhost:5042/notedocui/outline/summary?name="
             const reportURL = "http://localhost:5042/notedocui/report/"
+            
+
+            const row = table.insertRow();
+            const cellAllEntities = row.insertCell();
+            cellAllEntities.textContent = "All"
+
+            const cellKeyInfo = row.insertCell()
+            cellKeyInfo.style.width = "60px"
+            const linkKeyInfo = document.createElement("a");
+            linkKeyInfo.href = reportURL + "keyinfo?&days=1825&format=html"
+            linkKeyInfo.textContent = "KeyInfo"
+            cellKeyInfo.appendChild(linkKeyInfo)
+
+
             entityArr.forEach(entityRec => {
                 // console.log(entityRec)
                 const row = table.insertRow();
-                const cell1 = row.insertCell();
-                cell1.textContent = entityRec[0]
+                const cellEntity = row.insertCell();
+                cellEntity.textContent = entityRec[0]
                 var entityParts = entityRec[0].split(".")
                 const entityAspects = entityRec[1]
 
                 const cellStatus = row.insertCell()
+                cellStatus.style.width = "40px"
                 const linkStatus = document.createElement("a");
-                linkStatus.href = reportURL + "status?entity=" + entityParts[0] + "." + entityParts[1] + "&days=180&format=html"
+                linkStatus.href = reportURL + "status?entity=" + entityParts[0] + "." + entityParts[1] + "&days=1825&format=html"
                 linkStatus.textContent = "Status"
                 cellStatus.appendChild(linkStatus)
 
+                const cellStatusWithSumm = row.insertCell()
+                cellStatusWithSumm.style.width = "70px"
+                const linkStatusWithSumm = document.createElement("a");
+                linkStatusWithSumm.href = reportURL + "status?entity=" + entityParts[0] + "." + entityParts[1] + "&days=1825&summary=true&format=html"
+                linkStatusWithSumm.textContent = "W/Summ"
+                cellStatusWithSumm.appendChild(linkStatusWithSumm)
+
                 const cellKeyInfo = row.insertCell()
+                cellKeyInfo.style.width = "60px"
                 const linkKeyInfo = document.createElement("a");
-                linkKeyInfo.href = reportURL + "keyinfo?entity=" + entityParts[0] + "." + entityParts[1] + "&days=180&format=html"
+                linkKeyInfo.href = reportURL + "keyinfo?entity=" + entityParts[0] + "." + entityParts[1] + "&days=1825&format=html"
                 linkKeyInfo.textContent = "KeyInfo"
                 cellKeyInfo.appendChild(linkKeyInfo)
 
-                const cell2 = row.insertCell()
+                const cellRefr = row.insertCell()
+                cellRefr.style.width = "50px"
                 if (entityAspects.includes("Reference")) {
                     const link = document.createElement("a");
                     link.href = outlineURL + entityParts[1] + "&type=" + entityParts[0] + "&aspect=Reference&format=html"
                     link.textContent = "nodoc"
-                    cell2.appendChild(link)
+                    cellRefr.appendChild(link)
                 } else {
-                    cell2.textContent = "    "
+                    cellRefr.textContent = "    "
                 }
 
-                const cell3 = row.insertCell()
+                const cellToolbox = row.insertCell()
+                cellToolbox.style.width = "50px"
                 if (entityAspects.includes("Toolbox")) {
                     const link = document.createElement("a");
                     link.href = outlineURL + entityParts[1] + "&type=" + entityParts[0] + "&aspect=Toolbox&format=html"
                     link.textContent = "ntlbox"
-                    cell3.appendChild(link)
+                    cellToolbox.appendChild(link)
                 } else {
-                    cell3.textContent = "    "
+                    cellToolbox.textContent = "    "
                 }
 
-                const cell4 = row.insertCell()
+                const cellSuppRefr = row.insertCell()
+                cellSuppRefr.style.width = "50px"
                 if (entityAspects.includes("SupportReference")) {
                     const link = document.createElement("a");
                     link.href = outlineURL + entityParts[1] + "&type=" + entityParts[0] + "&aspect=SupportReference&format=html"
                     link.textContent = "nosupp"
-                    cell4.appendChild(link)
+                    cellSuppRefr.appendChild(link)
                 } else {
-                    cell4.textContent = "    "
+                    cellSuppRefr.textContent = "    "
                 }
             })
             // for (let i = 0; i < 3; i++) {

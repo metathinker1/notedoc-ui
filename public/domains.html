@@ -31,17 +31,25 @@
                 cell1.textContent = domainRec[1]
 
                 const cellStatus = row.insertCell()
+                cellStatus.style.width = "40px"
                 const linkStatus = document.createElement("a");
-                linkStatus.href = reportURL + "status?domain=" + domainRec[1] + "&days=180&format=html"
+                linkStatus.href = reportURL + "status?domain=" + domainRec[1] + "&days=1825&format=html"
                 linkStatus.textContent = "Status"
                 cellStatus.appendChild(linkStatus)
 
+                const cellStatusWithSumm = row.insertCell()
+                cellStatusWithSumm.style.width = "70px"
+                const linkStatusWithSumm = document.createElement("a");
+                linkStatusWithSumm.href = reportURL + "status?domain=" + domainRec[1] + "&summary=true&days=1825&format=html"
+                linkStatusWithSumm.textContent = "W/Summ"
+                cellStatusWithSumm.appendChild(linkStatusWithSumm)
+
                 const cellKeyInfo = row.insertCell()
+                cellKeyInfo.style.width = "60px"
                 const linkKeyInfo = document.createElement("a");
-                linkKeyInfo.href = reportURL + "keyinfo?domain=" + domainRec[1] + "&days=180&format=html"
+                linkKeyInfo.href = reportURL + "keyinfo?domain=" + domainRec[1] + "&days=1825&format=html"
                 linkKeyInfo.textContent = "KeyInfo"
                 cellKeyInfo.appendChild(linkKeyInfo)
-
             })
 
             tableDiv.appendChild(table)
