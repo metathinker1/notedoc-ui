@@ -36,9 +36,10 @@ app.get('/notedocui/outline/summary', async (req, res) => {
     const entityName = req.query.name
     const entityType = req.query.type
     const entityAspect = req.query.aspect
+    const expandList = req.query.expand
 
     const noteDoc = new NoteDocument()
-    const summaryOutline = await noteDoc.getOutlineSummary(entityName, entityType, entityAspect)
+    const summaryOutline = await noteDoc.getOutlineSummary(entityName, entityType, entityAspect, expandList)
     res.type('text/html')
     res.send(summaryOutline)
 })

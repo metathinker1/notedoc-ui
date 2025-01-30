@@ -65,10 +65,10 @@ class NoteDocument {
         })
     }
 
-    getOutlineSummary (name, type, aspect) {
+    getOutlineSummary (name, type, aspect, expandList) {
         return new Promise( resolve => {
             const headers = {"Content-Type":"text/html"}
-            const params_obj = {params: {name: name, type: type, aspect: aspect, format: "html"}}
+            const params_obj = {params: {name: name, type: type, aspect: aspect, expand: expandList, format: "html"}}
             // https://github.com/axios/axios/issues/3821
             //const url = 'http://localhost:5100/notedocsvc/outline/summary'
             const url = BASE_URL + ':' + PORT + '/notedocsvc/outline/summary'
