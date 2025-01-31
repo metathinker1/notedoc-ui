@@ -41,6 +41,19 @@
             linkKeyInfo.textContent = "KeyInfo"
             cellKeyInfo.appendChild(linkKeyInfo)
 
+            const cellMilestone = row.insertCell()
+            cellMilestone.style.width = "70px"
+            const linkMilestone = document.createElement("a");
+            linkMilestone.href = reportURL + "milestone?&days=1825&format=html"
+            linkMilestone.textContent = "Milestone"
+            cellMilestone.appendChild(linkMilestone)
+
+            const cellWorkItem = row.insertCell()
+            cellWorkItem.style.width = "70px"
+            const linkWorkItem = document.createElement("a");
+            linkWorkItem.href = reportURL + "workitem?&days=1825&format=html"
+            linkWorkItem.textContent = "WorkItem"
+            cellWorkItem.appendChild(linkWorkItem)
 
             entityArr.forEach(entityRec => {
                 // console.log(entityRec)
@@ -71,6 +84,13 @@
                 linkKeyInfo.textContent = "KeyInfo"
                 cellKeyInfo.appendChild(linkKeyInfo)
 
+                const cellKnowSumm = row.insertCell()
+                cellKnowSumm.style.width = "60px"
+                const linkKnowSumm = document.createElement("a");
+                linkKnowSumm.href = reportURL + "knowsumm?entity=" + entityParts[0] + "." + entityParts[1] + "&days=1825&format=html"
+                linkKnowSumm.textContent = "KnowSumm"
+                cellKnowSumm.appendChild(linkKnowSumm)
+                
                 const cellRefr = row.insertCell()
                 cellRefr.style.width = "50px"
                 if (entityAspects.includes("Reference")) {
@@ -103,6 +123,21 @@
                 } else {
                     cellSuppRefr.textContent = "    "
                 }
+
+                const cellWorkItem = row.insertCell()
+                cellWorkItem.style.width = "60px"
+                const linkWorkItem = document.createElement("a");
+                linkWorkItem.href = reportURL + "workitem?entity=" + entityParts[0] + "." + entityParts[1] + "&days=1825&format=html"
+                linkWorkItem.textContent = "WorkItem"
+                cellWorkItem.appendChild(linkWorkItem)
+
+                const cellTracker = row.insertCell()
+                cellTracker.style.width = "60px"
+                const linkTracker = document.createElement("a");
+                linkTracker.href = reportURL + "tracker?entity=" + entityParts[0] + "." + entityParts[1] + "&days=1825&format=html"
+                linkTracker.textContent = "Tracker"
+                cellTracker.appendChild(linkTracker)
+
             })
             // for (let i = 0; i < 3; i++) {
             //     const row = table.insertRow();

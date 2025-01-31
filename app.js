@@ -71,6 +71,71 @@ app.get('/notedocui/report/keyinfo', async (req, res) => {
     res.send(statusReport)
 })
 
+app.get('/notedocui/report/knowsumm', async (req, res) => {
+    const days = req.query.days
+    const beginDate = req.query.begin
+    const endDate = req.query.end
+    const entity = req.query.entity
+    const domain = req.query.domain
+
+    const noteDoc = new NoteDocument()
+    const statusReport = await noteDoc.getReport("knowsumm", days, beginDate, endDate, entity, domain)
+    res.type('text/html')
+    res.send(statusReport)
+})
+
+app.get('/notedocui/report/milestone', async (req, res) => {
+    const days = req.query.days
+    const beginDate = req.query.begin
+    const endDate = req.query.end
+    const entity = req.query.entity
+    const domain = req.query.domain
+
+    const noteDoc = new NoteDocument()
+    const statusReport = await noteDoc.getReport("milestone", days, beginDate, endDate, entity, domain)
+    res.type('text/html')
+    res.send(statusReport)
+})
+
+app.get('/notedocui/report/workitem', async (req, res) => {
+    const days = req.query.days
+    const beginDate = req.query.begin
+    const endDate = req.query.end
+    const entity = req.query.entity
+    const domain = req.query.domain
+
+    const noteDoc = new NoteDocument()
+    const statusReport = await noteDoc.getReport("workitem", days, beginDate, endDate, entity, domain)
+    res.type('text/html')
+    res.send(statusReport)
+})
+
+app.get('/notedocui/report/tracker', async (req, res) => {
+    const days = req.query.days
+    const beginDate = req.query.begin
+    const endDate = req.query.end
+    const entity = req.query.entity
+    const domain = req.query.domain
+
+    const noteDoc = new NoteDocument()
+    const statusReport = await noteDoc.getReport("tracker", days, beginDate, endDate, entity, domain)
+    res.type('text/html')
+    res.send(statusReport)
+})
+
+app.get('/notedocui/report/learn', async (req, res) => {
+    const days = req.query.days
+    const beginDate = req.query.begin
+    const endDate = req.query.end
+    const entity = req.query.entity
+    const domain = req.query.domain
+
+    const noteDoc = new NoteDocument()
+    const statusReport = await noteDoc.getReport("learn", days, beginDate, endDate, entity, domain)
+    res.type('text/html')
+    res.send(statusReport)
+})
+
 app.get('/notedocui/statusreport', async (req, res) => {
     const days = req.query.days
     const beginDate = req.query.begin
