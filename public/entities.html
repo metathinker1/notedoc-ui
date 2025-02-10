@@ -62,6 +62,13 @@
             linkTracker.textContent = "Tracker"
             cellTracker.appendChild(linkTracker)
 
+            const cellManager = row.insertCell()
+            cellManager.style.width = "70px"
+            const linkManager = document.createElement("a");
+            linkManager.href = reportURL + "manager?&days=1825&format=html"
+            linkManager.textContent = "Manager"
+            cellManager.appendChild(linkManager)
+
             entityArr.forEach(entityRec => {
                 // console.log(entityRec)
                 const row = table.insertRow();
@@ -144,6 +151,20 @@
                 linkTracker.href = reportURL + "tracker?entity=" + entityParts[0] + "." + entityParts[1] + "&days=1825&format=html"
                 linkTracker.textContent = "Tracker"
                 cellTracker.appendChild(linkTracker)
+
+                const cellLearn = row.insertCell()
+                cellLearn.style.width = "60px"
+                const linkLearn = document.createElement("a");
+                linkLearn.href = reportURL + "learn?entity=" + entityParts[0] + "." + entityParts[1] + "&days=1825&format=html"
+                linkLearn.textContent = "Learn"
+                cellLearn.appendChild(linkLearn)
+
+                const cellTool = row.insertCell()
+                cellTool.style.width = "60px"
+                const linkTool = document.createElement("a");
+                linkTool.href = reportURL + "tool?entity=" + entityParts[0] + "." + entityParts[1] + "&days=1825&format=html"
+                linkTool.textContent = "Tool"
+                cellTool.appendChild(linkTool)
 
             })
             // for (let i = 0; i < 3; i++) {

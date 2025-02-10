@@ -136,6 +136,32 @@ app.get('/notedocui/report/learn', async (req, res) => {
     res.send(statusReport)
 })
 
+app.get('/notedocui/report/tool', async (req, res) => {
+    const days = req.query.days
+    const beginDate = req.query.begin
+    const endDate = req.query.end
+    const entity = req.query.entity
+    const domain = req.query.domain
+
+    const noteDoc = new NoteDocument()
+    const statusReport = await noteDoc.getReport("tool", days, beginDate, endDate, entity, domain)
+    res.type('text/html')
+    res.send(statusReport)
+})
+
+app.get('/notedocui/report/manager', async (req, res) => {
+    const days = req.query.days
+    const beginDate = req.query.begin
+    const endDate = req.query.end
+    const entity = req.query.entity
+    const domain = req.query.domain
+
+    const noteDoc = new NoteDocument()
+    const statusReport = await noteDoc.getReport("manager", days, beginDate, endDate, entity, domain)
+    res.type('text/html')
+    res.send(statusReport)
+})
+
 app.get('/notedocui/statusreport', async (req, res) => {
     const days = req.query.days
     const beginDate = req.query.begin
