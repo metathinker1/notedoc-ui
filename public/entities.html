@@ -55,6 +55,13 @@
             linkWorkItem.textContent = "WorkItem"
             cellWorkItem.appendChild(linkWorkItem)
 
+            const cellTracker = row.insertCell()
+            cellTracker.style.width = "70px"
+            const linkTracker = document.createElement("a");
+            linkTracker.href = reportURL + "tracker?&days=1825&format=html"
+            linkTracker.textContent = "Tracker"
+            cellTracker.appendChild(linkTracker)
+
             entityArr.forEach(entityRec => {
                 // console.log(entityRec)
                 const row = table.insertRow();
